@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
 const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const baseUrl = import.meta.env.VITE_API_URL;
@@ -11,7 +10,7 @@ export const AuthProvider = ({ children }) => {
       const user = JSON.parse(localStorage.getItem("userData"));
       const jwtToken = localStorage.getItem("jwt");
       if (jwtToken) setJwt(jwtToken);
-      if (userData) setUserData(user);
+      if (user) setUserData(user);
     })();
   }, []);
   const login = async ({ email, password }) => {
@@ -26,13 +25,13 @@ export const AuthProvider = ({ children }) => {
       const userResponse = await axios.get(
         `${baseUrl}/auth/profile`,
         {
-          headers: { Authorization: `Bearer ${jwt}}` },
+          headers: { Authorization: `Bearer ${jwt}` },
         }
       );
       const user = userResponse.data;
       setUserData(user);
       localStorage.setItem("userData", JSON.stringify(user));
-      return { success: true };
+      return { success: true , message: "Login successful" };
     } catch (error) {
       console.error("Login failed:", error);
       return {
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async ({ name, email, password }) => {
     try {
-      const response = await axios.post(`${baseUrl}/auth/users`, {
+      const response = await axios.post(`${baseUrl}/users`, {
         name,
         email,
         password,
@@ -59,11 +58,11 @@ export const AuthProvider = ({ children }) => {
           "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small_2x/default-avatar-photo-placeholder-profile-icon-vector.jpg",
       });
       const data = response.data;
-
+      
       if (response.status === 201) {
-        await login({ email: data.email, password: data.password });
+        await login({ email, password});
       }
-      return { success: true };
+      return { success: true, message: "Signup successful" };
     } catch (error) {
       console.error("Signup failed:", error);
       return {

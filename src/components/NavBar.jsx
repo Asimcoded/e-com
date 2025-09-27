@@ -1,12 +1,13 @@
-import React, { useState } from "react";
 import { ShoppingCart, User, Sun, Moon, Search } from "lucide-react";
 import { LogoIcon } from "../assets";
 import { useTheme } from "../contexts/ThemeContext";
 import {useAuth} from '../contexts/AuthContext'
 import Button from "./Button";
+import { Link, useNavigate } from "react-router";
 const NavBar = () => {
   const { theme, toggleTheme } = useTheme();
   const {userData} = useAuth()
+  const navigate = useNavigate()
   return (
     <nav>
       <div className="w-full bg-white dark:bg-gray-900 shadow-md">
@@ -56,7 +57,8 @@ const NavBar = () => {
 
             {/* Profile */}
           
-            {userData ? <span className="text-gray-700 dark:text-gray-200 hidden md:block">Hello, {userData.name}</span>:<Button value="Login / Register" onClick={()=>{}} />}
+            {userData ? 
+            <Link to="/profile"><img src={userData.avatar} alt={userData.name} className="w-10 h-10 rounded-full"/></Link>:<Button value="Login / Register" onClick={()=>{navigate("/auth/login")}} />}
             {/* Dark/Light Mode Toggle */}
             <button
               onClick={() => toggleTheme()}
