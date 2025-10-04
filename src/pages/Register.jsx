@@ -18,7 +18,7 @@ const Register = () => {
     const result = await signup({ name, email, password });
     if (result.success) {
       alert(result.message);
-      navigate("/");
+      navigate("/auth/login");
     }else{
       setEmail("")
       setPassword("")

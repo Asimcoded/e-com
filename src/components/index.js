@@ -1,3 +1,8 @@
 export {default as NavBar} from './NavBar'
 export {default as Footer} from './Footer'
 export {default as Button} from './Button'
+export {default as Carousel} from './Carousel'
+export {default as FeaturesSection} from './FeaturesSection'
+export {default as CategoryCard} from './CategoryCard'
+export {default as ProductCard} from './ProductCard'
+export {default as NewsletterSection} from './NewsletterSection'
