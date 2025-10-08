@@ -1,6 +1,7 @@
 import React from "react";
 import { Facebook, Twitter, Instagram } from "lucide-react";
 import { LogoIcon } from "../assets";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -27,28 +28,28 @@ const Footer = () => {
           </h3>
           <ul className="space-y-2">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/category"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 Category
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/profile"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 Profile
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

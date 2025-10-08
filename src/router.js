@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import {Cart, Category, Home, Login, NotFound, Product, Profile, Register, SearchResult} from "./pages"
+import {Cart, Category, Home, Login, NotFound, Product, Profile, Register, ResultPage} from "./pages"
 import {AuthLayout, RootLayout} from "./layouts";
 
 const router = createBrowserRouter([
@@ -10,8 +10,8 @@ const router = createBrowserRouter([
       {index : true, Component : Home},
       {path : "product/:id", Component : Product},
       {path : "cart", Component : Cart},
-      {path : "category", Component : Category},
-      {path : "searchresult", Component : SearchResult},
+      {path : "categories", Component : Category},
+      {path : "categories/:id", Component : ResultPage},
       {path : "profile", Component : Profile},
       {path : "*", Component : NotFound}
     ]

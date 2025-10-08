@@ -2,58 +2,48 @@ import { ShoppingCart, User, Sun, Moon, Search } from "lucide-react";
 import { LogoIcon } from "../assets";
 import { useTheme } from "../contexts/ThemeContext";
 import {useAuth} from '../contexts/AuthContext'
+import {useCart} from '../contexts/CartContext'
 import Button from "./Button";
 import { Link, useNavigate } from "react-router";
 const NavBar = () => {
   const { theme, toggleTheme } = useTheme();
   const {userData} = useAuth()
+  const {cartData} = useCart()
   const navigate = useNavigate()
   return (
     <nav>
       <div className="w-full bg-white dark:bg-gray-900 shadow-md">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link className="flex items-center space-x-2">
             <img src={LogoIcon} alt="Logo" className="w-8 h-8 object-contain" />
             <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
               Carty
             </span>
-          </div>
+          </Link>
 
-          {/* Search Bar */}
-          <div className="flex-1 mx-6 hidden md:flex">
-            <div className="relative w-full max-w-md">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
-            </div>
-          </div>
 
           {/* Nav Links + Icons */}
           <div className="flex items-center space-x-5">
-            <a
-              href="#"
+            <Link to="/"
+
               className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hidden md:block"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link to="/categories"
               className="text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hidden md:block"
             >
               Category
-            </a>
+            </Link>
 
             {/* Cart */}
-            <button className="relative">
+            <Link to="/cart" className="relative">
               <ShoppingCart className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-                2
-              </span>
-            </button>
+              {cartData.length > 0 && <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                {cartData.length}
+              </span> }
+            </Link>
 
             {/* Profile */}
           
